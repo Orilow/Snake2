@@ -9,6 +9,8 @@ public class Snake {
     public int number;
     public int score = 0;
 
+    public Point getDirection(){ return direction; }
+
     public Snake(int size, int num){
         number = num;
         for(int i = size - 1; i != -1; --i)
