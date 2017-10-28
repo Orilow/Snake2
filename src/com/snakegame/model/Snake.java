@@ -26,11 +26,11 @@ public class Snake {
         else delta = 0;
 
         if (!direction.equals(Direction.Up))
-        for(int i = size - 1; i != -1; --i)
-            snakePoints.add(new Point(x+delta, y + i));
+        for(int i = 0; i != size; ++i)
+            snakePoints.add(new Point(x+delta, y - i));
         else{
-            for(int i = size - 1; i != -1; --i)
-                snakePoints.add(new Point(x+delta, y - i));
+            for(int i = 0; i != size; ++i)
+                snakePoints.add(new Point(x+delta, y + i ));
         }
     }
 

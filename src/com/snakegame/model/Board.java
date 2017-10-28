@@ -27,6 +27,16 @@ public class Board {
         dropFruit();
     }
 
+    public int getWidth(){
+        return width;
+    }
+    public int getHeight(){
+        return height;
+    }
+    public GameMode getGameMode(){
+        return gameMode;
+    }
+
     public void checkCollisions() {
         for(int i = 0; i != gameMode.snakeCount; ++i)
             checkCollision(i);
