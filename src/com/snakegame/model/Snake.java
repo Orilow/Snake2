@@ -9,8 +9,6 @@ public class Snake {
     public int number;
     public int score = 0;
 
-    public Point getDirection(){ return direction; }
-
     public Snake(int size, int num){
         number = num;
         for(int i = size - 1; i != -1; --i)
@@ -20,21 +18,11 @@ public class Snake {
 
     public Snake(int x, int y, Point snakeDirection, int size, int snakeNumber){
         number = snakeNumber;
-        int delta;
-        direction = snakeDirection;
-        if (number % 2 == 0)delta = 3;
-        else delta = 0;
-
-        if (!direction.equals(Direction.Up))
         for(int i = 0; i != size; ++i)
-            snakePoints.add(new Point(x+delta, y - i));
-        else{
-            for(int i = 0; i != size; ++i)
-                snakePoints.add(new Point(x+delta, y + i ));
-        }
+            snakePoints.add(new Point(x+number * 3, y + direction.y * i));
     }
 
-    public void move(){
+    public void move() {
         for(int i = snakePoints.size() - 1; i != 0; --i)
             snakePoints.set(i, snakePoints.get(i - 1));
         Point head = snakePoints.get(0);
@@ -50,7 +38,7 @@ public class Snake {
                         2 * firstTail.y - secondTail.y));
     }
 
-    public void setDirection(Point newDir) {
+    public void setDirection(Point newDir){
         if(newDir.equals(new Point(-direction.x, -direction.y)))
             return;
         direction = newDir;
@@ -58,6 +46,10 @@ public class Snake {
 
     public Point getHead(){
         return snakePoints.get(0);
+    }
+    
+    public Point getDirection(){ 
+        return direction; 
     }
 
 }
