@@ -18,6 +18,22 @@ public class Snake {
         direction = Direction.Down;
     }
 
+    public Snake(int x, int y, Point snakeDirection, int size, int snakeNumber){
+        number = snakeNumber;
+        int delta;
+        direction = snakeDirection;
+        if (number % 2 == 0)delta = 3;
+        else delta = 0;
+
+        if (!direction.equals(Direction.Up))
+        for(int i = size - 1; i != -1; --i)
+            snakePoints.add(new Point(x+delta, y + i));
+        else{
+            for(int i = size - 1; i != -1; --i)
+                snakePoints.add(new Point(x+delta, y - i));
+        }
+    }
+
     public void move(){
         for(int i = snakePoints.size() - 1; i != 0; --i)
             snakePoints.set(i, snakePoints.get(i - 1));

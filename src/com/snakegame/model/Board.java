@@ -37,7 +37,7 @@ public class Board {
             snakes[i].move();
     }
 
-    public void checkCollision(int snakeNumber) {
+    private void checkCollision(int snakeNumber) {
         Snake snake = snakes[snakeNumber];
         Point head = snake.getHead();
         if(head.equals(fruitPos)) {
