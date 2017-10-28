@@ -94,7 +94,7 @@ public class ModelTests {
 
         @Test
         public void testHitInWallGameOver() {
-            gameBoard.snakes[0] = new Snake(0, 0, Direction.Left, 3, 1);
+            gameBoard.snakes[0] = new Snake(0, 0, Direction.Left, 3, 0);
             Snake snake = gameBoard.snakes[0];
 
             snake.move();
@@ -109,7 +109,7 @@ public class ModelTests {
             int prevSnakeSize = snake.snakePoints.size();
             int prevScore = snake.score;
 
-            fruitPos.setAccessible(true);//можно было не париться с рефлексией и просто написать сеттер, но исправлять не буду
+            fruitPos.setAccessible(true);
             Point prevFruitPos = gameBoard.getFruitPos();
             fruitPos.set(gameBoard, new Point(snake.getHead().x + snake.getDirection().x,
                     snake.getHead().y + snake.getDirection().y));
@@ -136,7 +136,7 @@ public class ModelTests {
 
         @Test
         public void testEatingItselfGameOver() {
-            gameBoard.snakes[0] = new Snake(2, 2, Direction.Down, 5, 1);
+            gameBoard.snakes[0] = new Snake(2, 2, Direction.Down, 5, 0);
             Snake snake = gameBoard.snakes[0];
 
             snake.move();
@@ -192,7 +192,7 @@ public class ModelTests {
 
         @Test
         public void testEatingItselfInInfinite() {
-            gameBoard.snakes[0] = new Snake(10, 10, Direction.Down, 6,1);
+            gameBoard.snakes[0] = new Snake(10, 10, Direction.Down, 6,0);
             snake = gameBoard.snakes[0];
             snake.move();
             snake.setDirection(Direction.Right);
