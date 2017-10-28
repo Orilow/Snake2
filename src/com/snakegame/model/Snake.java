@@ -19,7 +19,7 @@ public class Snake {
     public Snake(int x, int y, Point snakeDirection, int size, int snakeNumber){
         number = snakeNumber;
         for(int i = 0; i != size; ++i)
-            snakePoints.add(new Point(x+number * 3, y + direction.y * i));
+            snakePoints.add(new Point(x + number * 3, y + direction.y * i));
     }
 
     public void move() {
