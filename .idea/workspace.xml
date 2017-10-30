@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="863a84c4-9546-488a-bc7a-2dd192fdedbf" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Snake2/com/snakegame/model/Board.class" afterPath="$PROJECT_DIR$/out/production/Snake2/com/snakegame/model/Board.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Snake2/com/snakegame/model/GameMode.class" afterPath="$PROJECT_DIR$/out/production/Snake2/com/snakegame/model/GameMode.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Snake2/com/snakegame/model/Snake.class" afterPath="$PROJECT_DIR$/out/production/Snake2/com/snakegame/model/Snake.class" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/README.md" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/snakegame/model/Board.java" afterPath="$PROJECT_DIR$/src/com/snakegame/model/Board.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/snakegame/model/GameMode.java" afterPath="$PROJECT_DIR$/src/com/snakegame/model/GameMode.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/snakegame/model/Snake.java" afterPath="$PROJECT_DIR$/src/com/snakegame/model/Snake.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -86,11 +82,11 @@
       <file leaf-file-name="Snake.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/snakegame/model/Snake.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="57" column="57" lean-forward="true" selection-start-line="57" selection-start-column="57" selection-end-line="57" selection-end-column="57" />
+            <state relative-caret-position="274">
+              <caret line="38" column="5" lean-forward="true" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
               <folding>
-                <element signature="e#2158#2159#0" expanded="true" />
-                <element signature="e#2199#2200#0" expanded="true" />
+                <element signature="e#2376#2377#0" expanded="true" />
+                <element signature="e#2417#2418#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -558,8 +554,8 @@
         <state relative-caret-position="187">
           <caret line="12" column="21" lean-forward="false" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
           <folding>
-            <element signature="e#2158#2159#0" expanded="true" />
-            <element signature="e#2199#2200#0" expanded="true" />
+            <element signature="e#2376#2377#0" expanded="true" />
+            <element signature="e#2417#2418#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -609,8 +605,8 @@
         <state relative-caret-position="242">
           <caret line="12" column="21" lean-forward="false" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
           <folding>
-            <element signature="e#2158#2159#0" expanded="true" />
-            <element signature="e#2199#2200#0" expanded="true" />
+            <element signature="e#2376#2377#0" expanded="true" />
+            <element signature="e#2417#2418#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -660,8 +656,8 @@
         <state relative-caret-position="242">
           <caret line="12" column="21" lean-forward="true" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
           <folding>
-            <element signature="e#2158#2159#0" expanded="true" />
-            <element signature="e#2199#2200#0" expanded="true" />
+            <element signature="e#2376#2377#0" expanded="true" />
+            <element signature="e#2417#2418#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -784,11 +780,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/snakegame/model/Snake.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="57" column="57" lean-forward="true" selection-start-line="57" selection-start-column="57" selection-end-line="57" selection-end-column="57" />
+        <state relative-caret-position="274">
+          <caret line="38" column="5" lean-forward="true" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
           <folding>
-            <element signature="e#2158#2159#0" expanded="true" />
-            <element signature="e#2199#2200#0" expanded="true" />
+            <element signature="e#2376#2377#0" expanded="true" />
+            <element signature="e#2417#2418#0" expanded="true" />
           </folding>
         </state>
       </provider>

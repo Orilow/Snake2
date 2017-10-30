@@ -1,6 +1,7 @@
 package com.snakegame.model;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Snake {
 
@@ -31,6 +32,12 @@ public class Snake {
             snakePoints.add(new Point(x + number * 3, y - direction.y * i));
     }
 
+    public Snake(Point[] coords, Point dir, int snakeNumber) {
+        number = snakeNumber;
+        direction = dir;
+        snakePoints = new ArrayList<Point>(Arrays.asList(coords));
+    }
+
     public void move(){
         for(int i = snakePoints.size() - 1; i != 0; --i)
             snakePoints.set(i, snakePoints.get(i - 1));
@@ -47,7 +54,7 @@ public class Snake {
         Point head = getHead();
         head = new Point(fruitPos.x - head.x , fruitPos.y - head.y);
         if(head.x != 0) direction = new Point((int)Math.signum(head.x), 0);
-        else direction = new Point(0, (int)Math.signum(head.y));
+ж        else direction = new Point(0, (int)Math.signum(head.y));
     }
 
     public void addLength(){
