@@ -105,13 +105,11 @@ public class ModelTests {
 
         @Test
         public void testGrowthSnakeAndCorrectEating() throws NoSuchFieldException, IllegalAccessException {
-            Field fruitPos = gameBoard.getClass().getDeclaredField("fruitPos");
             int prevSnakeSize = snake.snakePoints.size();
             int prevScore = snake.score;
-
-            fruitPos.setAccessible(true);//можно было не париться с рефлексией и просто написать сеттер, но исправлять не буду
             Point prevFruitPos = gameBoard.getFruitPos();
-            fruitPos.set(gameBoard, new Point(snake.getHead().x + snake.getDirection().x,
+
+            gameBoard.setFruitPos(new Point(snake.getHead().x + snake.getDirection().x,
                     snake.getHead().y + snake.getDirection().y));
             snake.move();
             gameBoard.checkCollisions();
@@ -126,9 +124,7 @@ public class ModelTests {
             int prevScore = gameBoard.score;
             int bonusPoints = gameBoard.fruit.givenScore;
 
-            Field fruitPos = gameBoard.getClass().getDeclaredField("fruitPos");
-            fruitPos.setAccessible(true);
-            fruitPos.set(gameBoard, new Point(snake.getHead().x, snake.getHead().y));
+            gameBoard.setFruitPos(new Point(snake.getHead().x, snake.getHead().y));
             gameBoard.checkCollisions();
 
             assertEquals(prevScore+bonusPoints, gameBoard.score);
@@ -156,10 +152,9 @@ public class ModelTests {
 
         @Test
         public void testRandomRespawningFruit() throws NoSuchFieldException {
-            gameBoard.getClass().getDeclaredField("fruitPos").setAccessible(true);
             Point prevFruitPos = gameBoard.getFruitPos();
-            prevFruitPos = new Point(snake.getHead().x+snake.getDirection().x,
-                    snake.getHead().y + snake.getDirection().y);
+            gameBoard.setFruitPos( new Point(snake.getHead().x+snake.getDirection().x,
+                    snake.getHead().y + snake.getDirection().y));
             snake.move();
             gameBoard.checkCollisions();
 
@@ -246,10 +241,9 @@ public class ModelTests {
         @Test
         public void testEatingFruitInInfinite() throws NoSuchFieldException, IllegalAccessException {
             int prevScore = gameBoard.score;
-            Field fruitPos = gameBoard.getClass().getDeclaredField("fruitPos");
-            fruitPos.setAccessible(true);
             Point prevFruitPos = gameBoard.getFruitPos();
-            fruitPos.set(gameBoard, new Point(snake.getHead().x + snake.getDirection().x,
+
+            gameBoard.setFruitPos(new Point(snake.getHead().x + snake.getDirection().x,
                                                 snake.getHead().y + snake.getDirection().y));
             snake.move();
             gameBoard.checkCollisions();
@@ -274,7 +268,7 @@ public class ModelTests {
         }
      }
 
-    public static class ModelTestsMultiplayer {
+    public static class ModelTestsMultiplayerInfinite {
         private Board gameBoard;
         private Snake snake1;
         private Snake snake2;
@@ -289,20 +283,21 @@ public class ModelTests {
 
         @Test
         public void testSnakesSpawnNotInOnePlace(){
-             assertNotEquals(snake1.getHead(), snake2.getHead());
+             for(int i = 0; i< snake1.getSize(); i++){
+                 for(int j = 0; j< snake2.getSize();j++){
+                     assertNotEquals(snake1.snakePoints.get(i),snake2.snakePoints.get(j));
+                 }
+             }
         }
 
         @Test
         public void testSecondSnakeEatingFruit() throws NoSuchFieldException, IllegalAccessException {
-            Field fruitPos = gameBoard.getClass().getDeclaredField("fruitPos");
-            fruitPos.setAccessible(true);
-            fruitPos.set(gameBoard, new Point(snake2.getHead().x + snake2.getDirection().x,
+            gameBoard.setFruitPos(new Point(snake2.getHead().x + snake2.getDirection().x,
                     snake2.getHead().y + snake2.getDirection().y));
             Point oldFruit = gameBoard.getFruitPos();
             int prevSnake2size = snake2.snakePoints.size();
             int prevSnake1size = snake1.snakePoints.size();
 
-            snake1.move();
             snake2.move();
             gameBoard.checkCollisions();
 

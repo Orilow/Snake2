@@ -31,6 +31,9 @@ public class Board {
         dropFruit();
     }
 
+    public void setFruitPos(Point point){
+        fruitPos = point;
+    }
     public int getWidth(){
         return width;
     }
