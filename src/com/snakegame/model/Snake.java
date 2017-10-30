@@ -8,6 +8,7 @@ public class Snake {
     private Point direction;
     public int number;
     public int score = 0;
+    public boolean bot = false;
 
     public Snake(int size, int num){
         number = num;
@@ -30,11 +31,23 @@ public class Snake {
             snakePoints.add(new Point(x + number * 3, y - direction.y * i));
     }
 
-    public void move() {
+    public void move(){
         for(int i = snakePoints.size() - 1; i != 0; --i)
             snakePoints.set(i, snakePoints.get(i - 1));
         Point head = snakePoints.get(0);
         snakePoints.set(0, new Point(head.x + direction.x, head.y + direction.y));
+    }
+
+    public void move(Point fruitPos) {
+        if(bot) botMove(fruitPos);
+        move();
+    }
+
+    public void botMove(Point fruitPos) {
+        Point head = getHead();
+        head = new Point(fruitPos.x - head.x , fruitPos.y - head.y);
+        if(head.x != 0) direction = new Point((int)Math.signum(head.x), 0);
+        else direction = new Point(0, (int)Math.signum(head.y));
     }
 
     public void addLength(){

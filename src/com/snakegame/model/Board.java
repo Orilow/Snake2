@@ -25,6 +25,8 @@ public class Board {
         snakes = new Snake[mode.snakeCount];
         for (int i = 0; i != mode.snakeCount; ++i)
             snakes[i] = new Snake(snakeSize, i);
+        for(int i = mode.snakeCount - mode.botCounts; i != mode.snakeCount; ++i)
+            snakes[i].bot = true;
         gameMode = mode;
         dropFruit();
     }
@@ -46,7 +48,7 @@ public class Board {
 
     public void moveSnakes() {
         for(int i = 0; i != gameMode.snakeCount; ++i)
-            snakes[i].move();
+            snakes[i].move(fruitPos);
     }
 
     private void checkCollision(int snakeNumber) {
