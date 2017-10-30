@@ -15,6 +15,13 @@ public class Snake {
             snakePoints.add(new Point(number * size, i));
         direction = Direction.Down;
     }
+    public Snake(int size, int num, int scr){
+        number = num;
+        score = scr;
+        for(int i = size - 1; i != -1; --i)
+            snakePoints.add(new Point(number * size, i));
+        direction = Direction.Down;
+    }
 
     public Snake(int x, int y, Point snakeDirection, int size, int snakeNumber){
         number = snakeNumber;

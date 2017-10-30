@@ -66,7 +66,7 @@ public class Board {
                 finished = true;
                 return;
             }
-            snakes[snakeNumber] = new Snake(snakeStartSize, snake.number);
+            snakes[snakeNumber] = new Snake(snakeStartSize, snake.number, snakes[snakeNumber].score);
         }
         int size = snake.snakePoints.size();
         for(int i = 0; i != gameMode.snakeCount; ++i)
