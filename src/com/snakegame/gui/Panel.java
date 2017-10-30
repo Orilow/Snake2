@@ -75,10 +75,17 @@ public class Panel extends JPanel implements ActionListener  {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int score = board.score;
         if(board.finished) {
-            JFrameExtentions.closeInfoBox("Game finised! Score: " + score, "Game Over!");
+            String infoMes = "Game finised!\n";
+            for(int i = 0; i != board.snakes.length; ++i) {
+                infoMes += "Player " + i + ". Score: " + board.snakes[i].score;
+                if(board.loserNum == i) infoMes += ". Loser";
+                infoMes += "\n";
+            }
+            JFrameExtentions.closeInfoBox(infoMes, "Game Over!");
+
         }
+        int score = board.score;
         board.moveSnakes();
         board.checkCollisions();
         if(board.score != score)

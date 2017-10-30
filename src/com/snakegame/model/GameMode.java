@@ -18,10 +18,12 @@ public class GameMode {
         GameMode classic = new GameMode(new Fruit[]{Fruit.apple}, false, 1);
         GameMode infinitive = new GameMode(new Fruit[]{Fruit.apple, Fruit.pear}, true, 1);
         GameMode twoSnakesInf = new GameMode(new Fruit[]{Fruit.apple}, true, 2);
+        GameMode twoSnakesCls = new GameMode(new Fruit[]{Fruit.apple}, false, 2);
 
         gameMods.put("classic", classic);
         gameMods.put("infinite", infinitive);
         gameMods.put("twosnakesinf", twoSnakesInf);
+        gameMods.put("twosnakesclassic", twoSnakesCls);
     }
     public static HashMap<String, GameMode> gameMods = new HashMap<>();
 }

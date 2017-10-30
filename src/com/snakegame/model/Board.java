@@ -15,11 +15,13 @@ public class Board {
     public Snake[] snakes;
     public boolean finished;
     public int score;
+    public int loserNum;
 
     public Board(int w, int h, int snakeSize, GameMode mode) {
         width = w;
         height = h;
         snakeStartSize = snakeSize;
+        loserNum = -1;
         snakes = new Snake[mode.snakeCount];
         for (int i = 0; i != mode.snakeCount; ++i)
             snakes[i] = new Snake(snakeSize, i);
@@ -60,20 +62,31 @@ public class Board {
         }
         if(head.x < 0 || head.y < 0 || head.x >= width || head.y >= height) {
             if(!gameMode.infMode) {
+                loserNum = snakeNumber;
                 finished = true;
                 return;
             }
             snakes[snakeNumber] = new Snake(snakeStartSize, snake.number);
         }
         int size = snake.snakePoints.size();
-        for(int i = 1; i != size; ++i)
-            if(head.equals(snake.snakePoints.get(i))) {
-                if(!gameMode.infMode) {
-                    finished = true;
-                    return;
+        for(int i = 0; i != gameMode.snakeCount; ++i)
+            for(int j = 0; j != snakes[i].getSize(); ++j) {
+                if(head.equals(snakes[i].snakePoints.get(j))) {
+                    if(j == 0 && i == snakeNumber) continue;
+                    if(i == snakeNumber){
+                        if (!gameMode.infMode) {
+                            loserNum = i;
+                            finished = true;
+                            return;
+                        }
+                        snake.snakePoints.subList(j - 1, size - 1).clear();
+                        return;
+                    }
+                    if(!gameMode.infMode) {
+                        loserNum = snakeNumber;
+                        finished = true;
+                    }
                 }
-                snake.snakePoints.subList(i - 1, size - 1).clear();
-                return;
             }
     }
 

@@ -53,4 +53,6 @@ public class Snake {
         return direction; 
     }
 
+    public int getSize() { return snakePoints.size(); }
+
 }
