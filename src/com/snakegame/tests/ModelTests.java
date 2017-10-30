@@ -132,18 +132,14 @@ public class ModelTests {
 
         @Test
         public void testEatingItselfGameOver() {
-            gameBoard.snakes[0] = new Snake(2, 2, Direction.Down, 5, 1);
+            gameBoard.snakes[0] = new Snake(Direction.Left,0,
+                    new Point(5,5),
+                    new Point(5,4),
+                    new Point(4,4),
+                    new Point(4,5),
+                    new Point(4,6));
             Snake snake = gameBoard.snakes[0];
 
-            snake.move();
-            snake.setDirection(Direction.Right);
-            gameBoard.checkCollisions();
-            snake.move();
-            snake.setDirection(Direction.Up);
-            gameBoard.checkCollisions();
-            snake.move();
-            snake.setDirection(Direction.Left);
-            gameBoard.checkCollisions();
             snake.move();
             gameBoard.checkCollisions();
 
