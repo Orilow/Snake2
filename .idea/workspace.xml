@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="863a84c4-9546-488a-bc7a-2dd192fdedbf" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/snakegame/gui/GameForm.java" afterPath="$PROJECT_DIR$/src/com/snakegame/gui/GameForm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/snakegame/gui/JFrameExtentions.java" afterPath="$PROJECT_DIR$/src/com/snakegame/gui/JFrameExtentions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/snakegame/gui/Panel.java" afterPath="$PROJECT_DIR$/src/com/snakegame/gui/Panel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/snakegame/gui/StartForm.java" afterPath="$PROJECT_DIR$/src/com/snakegame/gui/StartForm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/snakegame/model/Board.java" afterPath="$PROJECT_DIR$/src/com/snakegame/model/Board.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/snakegame/model/Direction.java" afterPath="$PROJECT_DIR$/src/com/snakegame/model/Direction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/snakegame/model/Fruit.java" afterPath="$PROJECT_DIR$/src/com/snakegame/model/Fruit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/snakegame/model/GameMode.java" afterPath="$PROJECT_DIR$/src/com/snakegame/model/GameMode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/snakegame/model/Snake.java" afterPath="$PROJECT_DIR$/src/com/snakegame/model/Snake.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/snakegame/tests/ModelTests.java" afterPath="$PROJECT_DIR$/src/com/snakegame/tests/ModelTests.java" />
-    </list>
+    <list default="true" id="863a84c4-9546-488a-bc7a-2dd192fdedbf" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
