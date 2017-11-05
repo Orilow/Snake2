@@ -76,28 +76,25 @@ public class StartForm extends JFrame {
         startButton.setSize(80, 30);
 
 
-        startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    int width = Integer.parseInt(widthBox.getText());
-                    int height = Integer.parseInt(heightBox.getText());
-                    int delay = Integer.parseInt(delayBox.getText());
-                    String modeName = modeBox.getText().toLowerCase();
-                    GameMode.loadGameMods();
-                    GameMode mode = GameMode.gameMods.get(modeName);
-                    if(width < 3 || height < 3) throw new IllegalArgumentException();
+        startButton.addActionListener(e -> {
+            try {
+                int width = Integer.parseInt(widthBox.getText());
+                int height = Integer.parseInt(heightBox.getText());
+                int delay = Integer.parseInt(delayBox.getText());
+                String modeName = modeBox.getText().toLowerCase();
+                GameMode.loadGameMods();
+                GameMode mode = GameMode.gameMods.get(modeName);
+                if(width < 3 || height < 3) throw new IllegalArgumentException();
 
-                    GameForm form = new GameForm();
-                    form.setSize(width * 30 + 20, height * 30 + 30);
-                    JFrameExtentions.SetLocationToCenter(form);
-                    Panel panel = new Panel(width, height, delay, mode);
-                    form.add(panel);
-                    setVisible(false);
-                    dispose();
-                } catch (Exception exp) {
-                    JFrameExtentions.infoBox("Incorrect format of data", "Error");
-                }
+                GameForm form = new GameForm();
+                form.setSize(width * 30 + 20, height * 30 + 30);
+                JFrameExtentions.SetLocationToCenter(form);
+                Panel panel1 = new Panel(width, height, delay, mode, null);
+                form.add(panel1);
+                setVisible(false);
+                dispose();
+            } catch (Exception exp) {
+                JFrameExtentions.infoBox("Incorrect format of data", "Error");
             }
         });
 

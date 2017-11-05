@@ -6,17 +6,15 @@ import java.util.HashMap;
 import javax.swing.*;
 import javax.swing.plaf.synth.ColorType;
 
+import com.snakegame.client.Client;
 import com.snakegame.model.*;
 
-public class Panel extends JPanel implements ActionListener  {
+public class Panel extends JPanel  {
 
     //private Image snake_circle = new ImageIcon(getClass().getResource("snake_circle.png")).getImage();
     private HashMap<Fruit, Image> fruitSprites = new HashMap<Fruit, Image>();
     private JLabel[] scoreLabels;
-    private static Board board;
-    private static GameMode gameMode;
-    private int fruitTimer;
-    private int delay;
+    public Game game;
 
     private static Color[] snakeColors =
             {Color.blue, Color.green, Color.red, Color.magenta};
@@ -27,7 +25,7 @@ public class Panel extends JPanel implements ActionListener  {
                     {KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT, KeyEvent.VK_UP, KeyEvent.VK_DOWN}
             };
 
-    public Panel(int w, int h, int del, GameMode mode) {
+    public Panel(int w, int h, int del, GameMode mode, Client client) {
         setBackground(Color.black);
         setFocusable(true);
         addKeyListener(new TAdapter());
@@ -38,16 +36,12 @@ public class Panel extends JPanel implements ActionListener  {
             scoreLabels[i].setLocation(300, 300 + i * 30);
             add(scoreLabels[i]);
         }
-
-        board = new Board(w, h, 3, mode);
-        gameMode = mode;
+        game = new Game(w, h, del, mode, this, client);
         LoadImages();
-        delay = del;
-        new Timer(delay, this).start();
-        fruitTimer = board.fruit.timeToDestroy;
     }
 
     private void LoadImages() {
+        GameMode gameMode = game.gameMode;
         for(Fruit fruit : gameMode.usingFruits)
             fruitSprites.put(fruit,
                     new ImageIcon(getClass().getResource(fruit.name + ".png")).getImage());
@@ -60,6 +54,7 @@ public class Panel extends JPanel implements ActionListener  {
     }
 
     private void doDrawing(Graphics g) {
+        Board board = game.board;
         g.drawImage(fruitSprites.get(board.fruit), board.getFruitPos().x * 30,  board.getFruitPos().y * 30, this);
         for(Snake snake: board.snakes) {
             scoreLabels[snake.number].setText("Score: " + snake.score);
@@ -70,33 +65,29 @@ public class Panel extends JPanel implements ActionListener  {
                 g.fillOval(point.x * 30, point.y * 30, 30, 30);
             }
         }
-        Toolkit.getDefaultToolkit().sync();
+        //Toolkit.getDefaultToolkit().sync();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        int score = board.score;
+    public void actionPerformed() {
+        Board board = game.board;
         if(board.finished) {
-            JFrameExtentions.closeInfoBox("Game finised! Score: " + score, "Game Over!");
-        }
-        board.moveSnakes();
-        board.checkCollisions();
-        if(board.score != score)
-            fruitTimer = board.fruit.timeToDestroy;
-        else {
-            fruitTimer -= delay;
-            if(fruitTimer < 0) {
-                board.dropFruit();
-                fruitTimer = board.fruit.timeToDestroy;
+            String infoMes = "Game finised!\n";
+            for(int i = 0; i != board.snakes.length; ++i) {
+                infoMes += "Player " + i + ". Score: " + board.snakes[i].score;
+                if(board.loserNum == i) infoMes += ". Loser";
+                infoMes += "\n";
             }
+            JFrameExtentions.closeInfoBox(infoMes, "Game Over!");
+
         }
         repaint();
     }
 
     private class TAdapter extends KeyAdapter {
-
         @Override
         public void keyPressed(KeyEvent e) {
+            Board board = game.board;
+            GameMode gameMode = game.gameMode;
             int key = e.getKeyCode();
             for (int i = 0; i != gameMode.snakeCount; ++i)
                 for(int j = 0; j != 4; ++j)

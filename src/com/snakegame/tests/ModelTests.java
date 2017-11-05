@@ -105,13 +105,11 @@ public class ModelTests {
 
         @Test
         public void testGrowthSnakeAndCorrectEating() throws NoSuchFieldException, IllegalAccessException {
-            Field fruitPos = gameBoard.getClass().getDeclaredField("fruitPos");
             int prevSnakeSize = snake.snakePoints.size();
             int prevScore = snake.score;
-
-            fruitPos.setAccessible(true);
             Point prevFruitPos = gameBoard.getFruitPos();
-            fruitPos.set(gameBoard, new Point(snake.getHead().x + snake.getDirection().x,
+
+            gameBoard.setFruitPos(new Point(snake.getHead().x + snake.getDirection().x,
                     snake.getHead().y + snake.getDirection().y));
             snake.move();
             gameBoard.checkCollisions();
@@ -126,9 +124,7 @@ public class ModelTests {
             int prevScore = gameBoard.score;
             int bonusPoints = gameBoard.fruit.givenScore;
 
-            Field fruitPos = gameBoard.getClass().getDeclaredField("fruitPos");
-            fruitPos.setAccessible(true);
-            fruitPos.set(gameBoard, new Point(snake.getHead().x, snake.getHead().y));
+            gameBoard.setFruitPos(new Point(snake.getHead().x, snake.getHead().y));
             gameBoard.checkCollisions();
 
             assertEquals(prevScore+bonusPoints, gameBoard.score);
@@ -136,18 +132,14 @@ public class ModelTests {
 
         @Test
         public void testEatingItselfGameOver() {
-            gameBoard.snakes[0] = new Snake(2, 2, Direction.Down, 5, 0);
+            gameBoard.snakes[0] = new Snake(Direction.Left,0,
+                    new Point(5,5),
+                    new Point(5,4),
+                    new Point(4,4),
+                    new Point(4,5),
+                    new Point(4,6));
             Snake snake = gameBoard.snakes[0];
 
-            snake.move();
-            snake.setDirection(Direction.Right);
-            gameBoard.checkCollisions();
-            snake.move();
-            snake.setDirection(Direction.Up);
-            gameBoard.checkCollisions();
-            snake.move();
-            snake.setDirection(Direction.Left);
-            gameBoard.checkCollisions();
             snake.move();
             gameBoard.checkCollisions();
 
@@ -156,27 +148,62 @@ public class ModelTests {
 
         @Test
         public void testRandomRespawningFruit() throws NoSuchFieldException {
-            gameBoard.getClass().getDeclaredField("fruitPos").setAccessible(true);
             Point prevFruitPos = gameBoard.getFruitPos();
-            prevFruitPos = new Point(snake.getHead().x+snake.getDirection().x,
-                    snake.getHead().y + snake.getDirection().y);
+            gameBoard.setFruitPos( new Point(snake.getHead().x+snake.getDirection().x,
+                    snake.getHead().y + snake.getDirection().y));
             snake.move();
             gameBoard.checkCollisions();
 
             assertNotEquals(prevFruitPos, gameBoard.getFruitPos());
         }
 
-//        @Test
-//        public void testSpawningSnakeHeadNotCloserThan3Cells(){
-//            int headX = snake.getHead().x;
-//            int headY = snake.getHead().y;
-//
-//            if (2 > headX ||
-//                    headX > gameBoard.getWidth() - 3 ||
-//                    2 > headY ||
-//                    headY > gameBoard.getHeight() - 3)
-//                fail("Snake is too close to the boundaries");
-//        }
+        @Test
+        public void test_reverse_direction_Down() {
+            gameBoard.snakes[0] = new Snake(5,5,Direction.Down,3,0);
+            snake = gameBoard.snakes[0];
+            Point originalDirection = snake.getDirection();
+
+            gameBoard.checkCollisions();
+            snake.setDirection(Direction.Up);
+
+            assertEquals("The course should not change on the opposite", originalDirection, gameBoard.snakes[0].getDirection());
+        }
+
+        @Test
+        public void test_reverse_direction_Up() {
+            gameBoard.snakes[0] = new Snake(5,5,Direction.Up,3,0);
+            snake = gameBoard.snakes[0];
+            Point originalDirection = snake.getDirection();
+
+            gameBoard.checkCollisions();
+            snake.setDirection(Direction.Down);
+
+            assertEquals("The course should not change on the opposite", originalDirection, gameBoard.snakes[0].getDirection());
+        }
+
+        @Test
+        public void test_reverse_direction_Right() {
+            gameBoard.snakes[0] = new Snake(5,5,Direction.Right,3,0);
+            snake = gameBoard.snakes[0];
+            Point originalDirection = snake.getDirection();
+
+            gameBoard.checkCollisions();
+            snake.setDirection(Direction.Left);
+
+            assertEquals("The course should not change on the opposite", originalDirection, gameBoard.snakes[0].getDirection());
+        }
+
+        @Test
+        public void test_reverse_direction_Left() {
+            gameBoard.snakes[0] = new Snake(5,5,Direction.Left,3,0);
+            snake = gameBoard.snakes[0];
+            Point originalDirection = snake.getDirection();
+
+            gameBoard.checkCollisions();
+            snake.setDirection(Direction.Right);
+
+            assertEquals("The course should not change on the opposite", originalDirection, gameBoard.snakes[0].getDirection());
+        }
     }
 
     public static class ModelTestsInfinitive {
@@ -207,40 +234,37 @@ public class ModelTests {
             assertEquals(4, snake.snakePoints.size());
         }
 
-//        @Test
-//        public void testEatingAppleOrPearInInfinite() throws NoSuchFieldException, IllegalAccessException {
-//            Snake snake = gameBoard.snake;
-//            Field fruitPos = gameBoard.getClass().getDeclaredField("fruitPos");
-//            fruitPos.setAccessible(true);
-//            fruitPos.set(gameBoard, new Point(0, 4));
-//            gameBoard.checkCollision();
-//            assertEquals(true, gameBoard.getScore() == 5 || gameBoard.getScore() == 1);
-//        }
-//
-//        @Test
-//        public void testGrowthSnakeInInfinite() throws NoSuchFieldException, IllegalAccessException {
-//            Snake snake = gameBoard.snake;
-//            Field fruitPos = gameBoard.getClass().getDeclaredField("fruitPos");
-//            fruitPos.setAccessible(true);
-//            fruitPos.set(gameBoard, new Point(0, 4));
-//            gameBoard.checkCollision();
-//            assertEquals(true, snake.snakePoints.size() == 10 || snake.snakePoints.size() == 6);
-//        }
-//
-//        @Test
-//        public void testHitInWallInInfinite() {
-//            Snake snake = gameBoard.snake;
-//            snake.setDirection(Direction.Left);
-//            snake.move();
-//            gameBoard.checkCollision();
-//            assertEquals(false, gameBoard.finished);
-//            assertEquals(5, gameBoard.snake.snakePoints.size());
-//            assertEquals(0, gameBoard.snake.getHead().x);
-//            assertEquals(4, gameBoard.snake.getHead().y);
-//        }
+        @Test
+        public void testEatingFruitInInfinite() throws NoSuchFieldException, IllegalAccessException {
+            int prevScore = gameBoard.score;
+            Point prevFruitPos = gameBoard.getFruitPos();
+
+            gameBoard.setFruitPos(new Point(snake.getHead().x + snake.getDirection().x,
+                                                snake.getHead().y + snake.getDirection().y));
+            snake.move();
+            gameBoard.checkCollisions();
+
+            assertNotEquals(prevScore, gameBoard.score);
+            assertNotEquals(prevFruitPos, gameBoard.getFruitPos());
+        }
+
+        @Test
+        public void testHitInWallInInfiniteLeadToSnakeRespawn() {
+            gameBoard.snakes[0] = new Snake(gameBoard.getWidth() - 1,gameBoard.getHeight() - 1, Direction.Right, 7,0);
+            snake = gameBoard.snakes[0];
+            Point prevHead = snake.getHead();
+            int prevSnakeSize = snake.snakePoints.size();
+            snake.move();
+            gameBoard.checkCollisions();
+            int currentSnakeSize = gameBoard.snakes[0].snakePoints.size();
+
+            assertNotEquals(prevHead, gameBoard.snakes[0].getHead());
+            assertTrue(currentSnakeSize < prevSnakeSize);
+            assertEquals(false, gameBoard.finished);
+        }
      }
 
-    public class ModelTestMultiplayer {
+    public static class ModelTestsMultiplayerInfinite {
         private Board gameBoard;
         private Snake snake1;
         private Snake snake2;
@@ -248,9 +272,44 @@ public class ModelTests {
         @Before
          public void testData(){
             GameMode.loadGameMods();
-            gameBoard = new Board(15,15, 3, GameMode.gameMods.get("twosnakesinf"));
+            gameBoard = new Board(20,20, 3, GameMode.gameMods.get("twosnakesinf"));
             snake1 = gameBoard.snakes[0];
             snake2 = gameBoard.snakes[1];
+        }
+
+        @Test
+        public void testSnakesSpawnNotInOnePlace(){
+             for(int i = 0; i< snake1.getSize(); i++){
+                 for(int j = 0; j< snake2.getSize();j++){
+                     assertNotEquals(snake1.snakePoints.get(i),snake2.snakePoints.get(j));
+                 }
+             }
+        }
+
+        @Test
+        public void testSecondSnakeEatingFruit() throws NoSuchFieldException, IllegalAccessException {
+            gameBoard.setFruitPos(new Point(snake2.getHead().x + snake2.getDirection().x,
+                    snake2.getHead().y + snake2.getDirection().y));
+            Point oldFruit = gameBoard.getFruitPos();
+            int prevSnake2size = snake2.snakePoints.size();
+            int prevSnake1size = snake1.snakePoints.size();
+
+            snake2.move();
+            gameBoard.checkCollisions();
+
+            assertNotEquals(oldFruit, gameBoard.getFruitPos() );
+            assertEquals(gameBoard.snakes[0].snakePoints.size(), prevSnake1size);
+            assertNotEquals(prevSnake2size, gameBoard.snakes[1].snakePoints.size());
+        }
+
+        @Test
+        public void testOnlySecondSnakeChangeDirection(){
+            Point prevSnake1Dir = snake1.getDirection();
+            Point prevSnake2Dir = snake2.getDirection();
+            snake2.setDirection(Direction.Right);
+
+            assertEquals(snake1.getDirection(), prevSnake1Dir);
+            assertNotEquals(snake2.getDirection(), prevSnake2Dir);
         }
     }
 }

@@ -1,8 +1,9 @@
 package com.snakegame.model;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public class Fruit {
+public class Fruit implements Serializable {
     public int givenScore;
     public int timeToDestroy;
     public String name;
