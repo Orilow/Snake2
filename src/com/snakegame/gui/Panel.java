@@ -68,14 +68,36 @@ public class Panel extends JPanel  {
         //Toolkit.getDefaultToolkit().sync();
     }
 
+<<<<<<< HEAD
     public void actionPerformed() {
         Board board = game.board;
+=======
+    @Override
+    public void actionPerformed(ActionEvent e) {
+>>>>>>> 91c594f716de3a4a9a5948fb86d7ec2d58585b56
         if(board.finished) {
             String infoMes = "Game finised!\n";
             for(int i = 0; i != board.snakes.length; ++i) {
                 infoMes += "Player " + i + ". Score: " + board.snakes[i].score;
                 if(board.loserNum == i) infoMes += ". Loser";
                 infoMes += "\n";
+<<<<<<< HEAD
+=======
+            }
+            JFrameExtentions.closeInfoBox(infoMes, "Game Over!");
+
+        }
+        int score = board.score;
+        board.moveSnakes();
+        board.checkCollisions();
+        if(board.score != score)
+            fruitTimer = board.fruit.timeToDestroy;
+        else {
+            fruitTimer -= delay;
+            if(fruitTimer < 0) {
+                board.dropFruit();
+                fruitTimer = board.fruit.timeToDestroy;
+>>>>>>> 91c594f716de3a4a9a5948fb86d7ec2d58585b56
             }
             JFrameExtentions.closeInfoBox(infoMes, "Game Over!");
 
